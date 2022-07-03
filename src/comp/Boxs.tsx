@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Boxs: React.FC = () => {
 
-  // const [boxs,setBoxs] = useState<string[]>([
+  // const [boxs,setBoxs] = useState<string[]>([ // old way
   //   '','','','','','','',
   //   '','','','','','','',
   //   '','','','','','','',
@@ -31,7 +31,7 @@ const Boxs: React.FC = () => {
   const [zero,setZero] = useState(0)
   const [arrLength,setArrLength] = useState(4)
 
-  // const [selectd,setSelectd] = useState<string[]>([])
+  // const [selectd,setSelectd] = useState<string[]>([])// old way
 
   const [enterMsg,setEnterMsg] = useState('')
 
@@ -106,7 +106,7 @@ const Boxs: React.FC = () => {
     }else {
       for (let i = 0; i < updated.length; i++) {
         if(updated[i].includes('')){}
-        // else if(!selectd.includes(updated[i].join(''))) {
+        // else if(!selectd.includes(updated[i].join(''))) { //old way
             if(updated[i +1].includes('')){
               let ar = updated[i].join('')
               let obj = {sl:ar,ex:words[i]}
@@ -128,16 +128,16 @@ const Boxs: React.FC = () => {
 
       <div className="boxs my-2">
       <div className="result bg-slate-400 rounded-md m-1">
-      {matching.map((el,i)=><div key={i} >
-        <span className='m-2'>The Word is: {el.ex}</span>
-        <span className='m-2'>Your Word is: {el.sl}</span>
+      {matching.map((el,i)=><div className='m-2 p-1' key={i} >
+        <span className='m-2 text-lime-200'>The Word is: <span className='text-lg border-b-2 '>{el.ex}</span></span>
+        <span className='m-2'>Your Word is: <span className='text-lg border-b-2 '>{el.sl}</span></span>
       </div> )}
 
       </div>
 
       <div className="emptyboxs my-4 relative mx-auto max-w-lg p-1 rounded-sm justify-between flex columns-5 flex-wrap bg-slate-600">
 
-      <div className='enter-msg bg-slate-400 p-1 rounded-md'>{enterMsg}</div>
+      {enterMsg.length > 0 && <div className='enter-msg bg-slate-400 text-lg p-1 rounded-md'>{enterMsg}</div>}
         <div className="boxs-container w-full flex-wrap flex">
             {updated.map((el,i)=> (
               <div key={i} className='w-full flex justify-between m-2 '>
@@ -156,10 +156,12 @@ const Boxs: React.FC = () => {
       <div className="letters mx-auto">
 
         {letters.map(letter=> (
-          <button onClick={()=> addLetter(letter)} className='m-3 bg-slate-400 rounded-lg text-lg p-3' key={letter}>{letter}</button>
+          <button onClick={()=> addLetter(letter)} 
+          // change letter text color on hover
+          className='m-3 bg-slate-400 hover:text-teal-100 rounded-lg text-lg p-3' key={letter}>{letter}</button>
         ))}
-        <button onClick={checkWord} className='m-3 bg-slate-400 rounded-lg text-lg p-3' >Enter</button>
-        <button onClick={deleteLetter} className='m-3 bg-slate-400 rounded-lg text-lg p-3' >Delete</button>
+        <button onClick={checkWord} className='m-3 hover:bg-lime-500 hover:text-slate-100 text-lime-400 bg-slate-600 rounded-lg text-lg p-3' >Enter</button>
+        <button onClick={deleteLetter} className='m-3 text-red-900 hover:bg-red-500 hover:text-red-50 bg-slate-300 rounded-lg text-lg p-3' >Delete</button>
       </div>
     </div>
   )
@@ -168,6 +170,6 @@ const Boxs: React.FC = () => {
 export default Boxs
 
 
-{/* {boxs?.map((el,i)=> (
+{/* {boxs?.map((el,i)=> (//old way
   <div key={i} className='w-14 text-center font-bold text-sky-400 h-9 mt-1 rounded-sm border-slate-400 border-2'>{el}</div>
 ))} */}
